@@ -45,3 +45,8 @@ grooscript {
   recursive = true
 }
 
+clean {
+  delete 'src/main/webapp/js/app'
+}
+
+build.dependsOn convert

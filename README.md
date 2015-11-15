@@ -18,5 +18,12 @@ templatesThread - Start a daemon to convert groovy templates to javascript if an
 [...]
 ```
 
-Both `initStaticWeb` and `convert` tasks are interesting here.
+`convert` task is the one interesting here.
+
+Convert is bound to the build task, so gradle build will basically invoke convert as well.
+
+Note: I tried syncGsLibs but it requires that the js files coming along with
+grooscript already exist on the js/lib subfolder. Too bad that forced me to
+include them in the git repo(I'd have liked that syncGsLibs would overwrite or
+recreate them).
 

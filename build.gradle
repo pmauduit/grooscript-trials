@@ -1,0 +1,47 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath "org.grooscript:grooscript-gradle-plugin:1.2.2"
+  }
+}
+
+apply plugin: 'groovy'
+apply plugin: "org.grooscript.conversion"
+
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+ext {
+  groovyVersion = '2.4.5'
+  gradleCurrentVersion = '2.8'
+  grooscriptVersion = '1.2.2'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+  compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
+  compile group: 'org.codehaus.groovy', name: 'groovy-json', version: groovyVersion
+  compile group: 'org.codehaus.groovy', name: 'groovy-test', version: groovyVersion
+  compile('io.reactivex:rxgroovy:1.0.0') {
+    exclude module: 'groovy-all'
+  }
+  compile ("org.grooscript:grooscript:${grooscriptVersion}") {
+    exclude module: 'groovy'
+    exclude module: 'groovy-json'
+  }
+  testCompile('org.spockframework:spock-core:1.0-groovy-2.4') {
+    exclude module: 'groovy-all'
+  }
+  testCompile 'cglib:cglib-nodep:2.2.2'
+}
+
+grooscript {
+  recursive = true
+}
+
